@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\CupsPrintConnector;
 use Mike42\Escpos\Printer;
 
 
@@ -24,7 +24,7 @@ $section = fread($myfile,filesize($text_file.".txt"));
 fclose($myfile);
 
 
-$connector = new FilePrintConnector("/dev/usb/lp0");
+$connector = new CupsPrintConnector("ZJ-58");
 $printer = new Printer($connector);
 $printer -> text($section);
 $printer -> cut();
