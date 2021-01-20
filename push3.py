@@ -1,3 +1,63 @@
+
+Aller au contenu
+Utiliser Gmail avec un lecteur d'écran
+Meet
+Nouvelle réunion
+Rejoindre une réunion
+Hangouts
+2 sur 2
+quest raspberry projet
+Boîte de réception
+Virginie B <vbejot@gmail.com>
+	
+Pièces jointesven. 31 juil. 2020 20:40
+	
+À moi
+<?php
+require __DIR__ . '/vendor/autoload.php';
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\CupsPrintConnector;
+$connector = new CupsPrintConnector("ZJ-58");
+$printer = new Printer($connector);
+
+
+
+$_GET = array();
+
+foreach($argv as $key => $pair) {
+    if ($key == 0) { //skip first element which is script name (test.php)
+        continue;
+    }
+
+    list($key, $value) = explode(":", $pair);
+    $_GET[$key] = $value;
+    print $key;
+    print $value;
+}
+
+$img_file = "/home/pi/quest_smith/story_text/".$_GET["story_follow_up"];
+
+$myfile = fopen($img_file.".png", "r") or die("Unable to open file!");
+$section = EscposImage::load($img_file.".png", "rb");
+
+//$section = fread($myfile,filesize($text_file.".txt"));
+
+  //  $tux = EscposImage::load("resources/tux.png", false);
+
+
+fclose($myfile);
+
+
+$printer -> bitImage($section);
+$printer -> cut();
+$printer -> close();
+
+4 pièces jointes
+	
+	
+	
+
 import RPi.GPIO as GPIO
 import subprocess
 import time
@@ -50,3 +110,5 @@ message = input("Press enter to quit\n\n") # Run until someone presses enter
 GPIO.cleanup() # Clean up
 
 
+push3.py
+Affichage de printphpmarche.php en cours...
